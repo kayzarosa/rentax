@@ -1,119 +1,133 @@
-<h1 align="left">
-  <img width="20%" alt="Docker" title="#Docker" src="https://user-images.githubusercontent.com/20192309/172686968-bf09e3f2-f46b-47a4-9e73-0811c481bfe5.png" />
-</h1>
+## VC-QUOTA-DASHBOAR-API
 
-# Docker e Docker Compose
+# :rocket: Back-End
 
-#### Nesse guia veremos como instalar o Docker e Docker Compose nos principais sistemas operacionais
+> TUDO ESTÁ BEM!!!!!.  <img src="https://user-images.githubusercontent.com/20192309/80777643-4202cd80-8b3c-11ea-8f32-5348bda4486b.jpg" width="10%" />
 
-<!--ts-->
-   * [Instalação do Docker](#instalacao-do-docker)
-      * [Windows (64 Bit)](#windows)
-      * [Mac OSX](#mac-osx)
-      * [Linux (Ubuntu/Debian)](#linux)
-   * [Instalação do Docker Compose](#instalacao-do-docker-compose)
-      * [Linux (Ubuntu/Debian)](#linux-ubuntu-debian)
-<!--te-->
+## Sobre a api
 
-## Instalação do Docker <a name="instalacao-do-docker"></a>
+Resumo da api
 
-<p>O Docker é uma ferramenta sensacional que nos permite pular as etapas chatas de configuração de serviços para nossa aplicação. Além disso, ele permite reaproveitarmos o Kernel da máquina hospedeira entre vários serviços executados simultaneamente, conhecidos como containers.</p>
-<p>Para iniciar a instalação do Docker vamos prosseguir para a seção "Get Started" presente no site da ferramenta: </p>
+## Versão e instalação
 
-> [Get Started](https://www.docker.com/get-started/)
+<a href="https://nodejs.org/pt/"> NodeJS v16.15.0 LTS</a> <br/>
 
-## Windows (64 Bit) <a name="windows"></a>
+## Ou pode instalar o NVM no linux que você pode trabalhar com qualquer versão do node.
 
-<p>O Docker no Windows possui alguns requisitos: </p>
+<a href="https://github.com/nvm-sh/nvm"> NVM</a> <br/>
 
-<ul>
-    <li>Microsoft Windows 10 Professional  ou Enterprise 64-bit</li>
-    <li>Caso você possua o Windows 10 Home 64-bit também é possível usar o Docker mas será necessário instalar o WSL2 também (o instalador já se encarrega disso para você)</li>
-</ul>
+<a href="./DOCKER.md">Instalando Docker 20.10.12 e Docker Compose 1.28.5 </a> <br/>
 
-> :warning: Caso você possua o Windows 32-bit, não será possível realizar a instalação do Docker.
 
-> :warning: Para que o restart da aplicação funcione corretamente ao salvar o código, é preciso que o projeto esteja na partição do Linux (WSL). 
-> Para mais informações: 
-> [Docker Docs - Windows - Best Practices](https://docs.docker.com/desktop/windows/wsl/#best-practices) <br />
-> Outra alternativa é adicionando a flag **--poll** no script **"dev"**.
+## Instalação dos pacotes
 
-<p>Caso tenha todos os requisitos, então faça a instalação do Docker para Windows:</p>
+Instale todas as dependências do projeto com o comando abaixo:
 
-> [Docker Desktop for Mac and Windows](https://www.docker.com/products/docker-desktop)
+````sh
+npm install --legacy-peer-deps
+````
 
-<p>Depois de instalar o Docker e abrir o software você já está pronto para continuar. Lembrando que essa versão do Docker para Windows tem uma interface visual muito bacana, ou seja, você pode usar a interface para visualizar os serviços sendo executados, logs, imagens e muito mais.
+<br />
 
-Para verificar que o Docker foi instalado corretamente, em **uma nova janela** do terminal execute:</p>
+Para configurar o banco de dados na aplicação duplicar o arquivo <b>src/shared/infra/typeorm/ormconfig.example.ts</b> e o renomeie ele para somente <b>ormconfig.ts</b> aqui nos temos os dados que serão utilizados para acessar o banco de dados mude o usuário e senha.
 
-```shell
-docker version
-```
+## Rodar o typeorm para criar todas as tabelas
+````sh
+npm run typeorm migration:create src/database/migrations/CreateCategories
+````
 
-## Mac OSX <a name="mac-osx"></a>
+Comando que cria as tabelas no banco de dados
 
-<p>No macOS o processo de instalação do Docker é extremamente simples, você precisa apenas baixar o app executável e executa-lo na máquina para iniciar o Docker:</p>
+````sh
+npm run typeorm migration:run -d src/shared/infra/typeorm/migrations
+````
 
-[Docker Desktop for Mac - Docker Hub](https://hub.docker.com/editions/community/docker-ce-desktop-mac)
+Após rodar o comando ele vai criar todos as tabelas no banco, caso de algum erro veja se o arquivo <b>ormconfig.ts</b> está com os dados corretos.
 
-<p>Depois de aberto você pode garantir que o Docker foi instalado corretamente executando o comando abaixo em uma nova janela do terminal:</p>
 
-```shell
-docker version
-```
+## Iniciar uma API via npm
 
-## Linux (Ubuntu/Debian) <a name="linux"></a>
+````sh
+npm run dev
+````
 
-<p>No Linux, vamos instalar o Docker utilizando o apt, para isso, em seu terminal, execute os comandos abaixo:</p>
+## Caso queira usar o docker-composer
+ 
+ Para iniciar ou criar um novo container do docker 
+ 
+````sh
+docker-compose up -d
+````
 
-```shell
-sudo apt update
-sudo apt remove docker docker-engine docker.io
-sudo apt install docker.io
-```
+O -d ele fala que após criar e iniciar o container ele vai liberar o terminal para continuar a ser utilizado, caso queira ver o que esta acontecendo remover o -d.
 
-<p>Agora com o Docker instalado, vamos habilitar para que seu serviço seja iniciado automaticamente com o sistema:</p>
+<br />
 
-```shell
-sudo systemctl start docker
-sudo systemctl enable docker
-```
+Realiza apenas a etapa de build das imagens que serão utilizadas;
 
-<p>Para garantir que o Docker foi instalado da forma correta, execute no terminal:</p>
+````sh
+docker-compose build
+````
 
-```shell
-docker version
-```
+<br />
 
-> :bulb: Você precisará executar todos comandos do Docker utilizando o sudo, mas caso queira executa-los sem o sudo,
-> [utilize esse guia.](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user)
+Visualiza os logs dos contêineres;
 
-## Instalação do Docker Compose <a name="instalacao-do-docker-compose"></a>
+````sh
+docker-compose logs
+````
 
-<p>Como visto durante as aulas, o Docker Compose precisará ser instalado apenas no Linux, já que nos demais sistemas ele já vem instalado junto com o Docker. </p>
+<br />
 
-## Linux (Ubuntu/Debian) <a name="linux-ubuntu-debian"></a>
+Reinicia os contêineres;
 
-<ul>
-    <li>Rode o seguinte comando para instalar o Docker Compose:</li>
-</ul>
+````sh
+docker-compose restart
+````
 
-```bash
-sudo curl -L "https://github.com/docker/compose/releases/download/1.28.5/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-```
+<br />
 
-<ul>
-    <li>Aplique as permissões necessárias ao binário:</li>
-</ul>
+Lista os contêineres;
 
-```bash
-sudo chmod +x /usr/local/bin/docker-compose
-```
+````sh
+docker-compose ps
+````
 
-<p>Após isso, rode o comando <b>docker-compose --version</b> para assegurar que a instalação foi um sucesso. Caso retorne algum erro (mesmo reiniciando o terminal), crie um link simbólico para <b>usr/bin</b> com o seguinte comando:</p>
+<br />
 
-```bash
-sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-```
+Permite aumentar o número de réplicas de um contêiner;
 
-<p>Por fim, teste novamente com o comando <b>docker-compose --version</b> para checar se está tudo funcionando.</p>
+````sh
+docker-compose scale
+````
+
+<br />
+
+Inicia os contêineres;
+
+````sh
+docker-compose start
+````
+
+<br />
+
+Paralisa os contêineres;
+
+````sh
+docker-compose stop
+````
+
+<br />
+
+Paralisa e remove todos os contêineres e seus componentes como rede, imagem e volume;
+
+````sh
+docker-compose down
+````
+
+## Usando a API
+
+Você encontra a documentação de exemplo nessa url: http://localhost:3000/docs.
+
+<br />
+Feito com ♥ by Kayza :wave:
