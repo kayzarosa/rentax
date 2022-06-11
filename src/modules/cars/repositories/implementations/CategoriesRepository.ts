@@ -1,15 +1,15 @@
+import AppDataSource from "@database/ormconfig";
 import { Repository } from "typeorm";
-import { AppDataSource } from "../../../../database/ormconfig";
 import Category from "../../entities/Category";
 import ICategoriesRepository, {
   ICreateCategoryDTO,
 } from "../ICategoriesRepository";
 
-export default class CategoriesRepository implements ICategoriesRepository {
+class CategoriesRepository implements ICategoriesRepository {
   private repository: Repository<Category>;
 
   constructor() {
-    this.repository = null;
+    this.repository = AppDataSource.getRepository(Category);
   }
 
   async create({ name, description }: ICreateCategoryDTO): Promise<void> {
@@ -32,3 +32,5 @@ export default class CategoriesRepository implements ICategoriesRepository {
     return category;
   }
 }
+
+export default CategoriesRepository;

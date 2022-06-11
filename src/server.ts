@@ -1,5 +1,8 @@
 import express from "express";
 import "./database/ormconfig";
+
+import "@shared/container";
+
 import swaggerUI from "swagger-ui-express";
 
 import router from "./routes";
