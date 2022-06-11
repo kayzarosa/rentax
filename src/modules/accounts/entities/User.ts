@@ -1,8 +1,8 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
-@Entity("categories")
-export default class Category {
+@Entity("users")
+class User {
   @PrimaryColumn()
   id: string;
 
@@ -10,7 +10,19 @@ export default class Category {
   name: string;
 
   @Column()
-  description: string;
+  username: string;
+
+  @Column()
+  password: string;
+
+  @Column()
+  email: string;
+
+  @Column()
+  driver_license: string;
+
+  @Column()
+  isAdmin: boolean;
 
   @CreateDateColumn()
   created_at: Date;
@@ -21,3 +33,5 @@ export default class Category {
     }
   }
 }
+
+export default User;
