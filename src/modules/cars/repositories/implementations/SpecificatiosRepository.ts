@@ -1,10 +1,10 @@
 import { Repository } from "typeorm";
 import AppDataSource from "@database/ormconfig";
 
-import Specification from "../../entities/Specification";
-import ISpecificatiosRepository, {
-  ICreateSpecificationDTO,
-} from "../ISpecificatiosRepository";
+import Specification from "@modules/cars/entities/Specification";
+
+import ISpecificatiosRepository from "../ISpecificatiosRepository";
+import ICreateSpecificationDTO from "@modules/cars/dtos/ICreateSpecificationDTO";
 
 export default class SpecificatiosRepository
   implements ISpecificatiosRepository

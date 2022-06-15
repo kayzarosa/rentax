@@ -3,8 +3,8 @@ import { hash } from 'bcrypt';
 
 import AppError from "@errors/AppError";
 
-import IUserRepository from "modules/accounts/repositories/IUserRepository";
-import ICreateUserDTO from "modules/accounts/dtos/ICreateUserDTO";
+import IUserRepository from "@modules/accounts/repositories/IUserRepository";
+import ICreateUserDTO from "@modules/accounts/dtos/ICreateUserDTO";
 
 @injectable()
 class CreateUserUseCase {

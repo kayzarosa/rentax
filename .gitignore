@@ -1,2 +1,5 @@
 src/database/ormconfig.ts
 node_modules
+
+coverage
+tmp
