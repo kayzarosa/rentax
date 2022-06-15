@@ -1,3 +1,4 @@
+import AppError from "@errors/AppError";
 import CreateCategoryUseCase from "./CreateCategoryUseCase";
 import CategoriesRepositoryInMemory from "@modules/cars/repositories/in-memory/CategoriesRepositoryInMemory";
 
@@ -25,5 +26,18 @@ describe("Create Category", () => {
     );
 
     expect(categoryCreated).toHaveProperty("id");
+  });
+
+  it("should not be able to create a new category with name exists", async () => {
+    const category = {
+      name: "Category Test",
+      description: "Category description Test",
+    };
+
+    await createCategoryUseCase.execute(category);
+
+    expect(async () => {
+      await createCategoryUseCase.execute(category);
+    }).rejects.toBeInstanceOf(AppError);
   });
 });
