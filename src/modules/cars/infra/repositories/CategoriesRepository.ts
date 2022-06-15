@@ -1,9 +1,9 @@
 import AppDataSource from "@database/ormconfig";
-import ICreateCategoryDTO from "@modules/cars/dtos/ICreateCategoryDTO";
-import Category from "@modules/cars/entities/Category";
 import { Repository } from "typeorm";
 
-import ICategoriesRepository from "../ICategoriesRepository";
+import ICreateCategoryDTO from "@modules/cars/dtos/ICreateCategoryDTO";
+import Category from "../typeorm/entities/Category";
+import ICategoriesRepository from "@modules/cars/repositories/ICategoriesRepository";
 
 class CategoriesRepository implements ICategoriesRepository {
   private repository: Repository<Category>;

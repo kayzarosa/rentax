@@ -8,10 +8,8 @@
     "baseUrl": "./src",
     "paths": {
       "@modules/*": ["modules/*"],
-      "@database/*": ["database/*"],
+      "@database/*": ["shared/infra/typeorm/*"],
       "@shared/*": ["shared/*"],
-      "@middlewares/*": ["middlewares/*"],
-      "@errors/*": ["errors/*"],
       "@config/*": ["config/*"],
       "@utils/*": ["utils/*"]
     },

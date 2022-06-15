@@ -1,8 +1,9 @@
-import AppError from "@errors/AppError";
+import AppError from "@shared/errors/AppError";
+
 import { NextFunction, Request, Response } from "express";
 import { verify } from "jsonwebtoken";
 
-import UserRepository from "modules/accounts/repositories/implementations/UserRepository";
+import UserRepository from "@modules/accounts/infra/typeorm/repositories/UserRepository";
 
 interface IPayload {
   sub: string;
@@ -36,7 +37,7 @@ export async function ensureAuthenticated(
     }
 
     request.user = {
-      id: user_id
+      id: user_id,
     };
 
     next();

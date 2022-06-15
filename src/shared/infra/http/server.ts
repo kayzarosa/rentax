@@ -4,12 +4,13 @@ import "@database/ormconfig";
 
 import "@shared/container";
 
-import AppError from "@errors/AppError";
+import AppError from "@shared/errors/AppError";
+
 import swaggerUI from "swagger-ui-express";
 
-import router from "./routes";
+import router from "@shared/infra/http/routes";
 
-import swaggerFile from "./swagger.json";
+import swaggerFile from "../../../swagger.json";
 
 const app = express();
 

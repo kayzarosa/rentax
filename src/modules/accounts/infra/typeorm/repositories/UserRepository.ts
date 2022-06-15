@@ -1,9 +1,9 @@
 import AppDataSource from "@database/ormconfig";
 import { Repository } from "typeorm";
 
-import IUserRepository from "../IUserRepository";
-import User from "@modules/accounts/entities/User";
 import ICreateUserDTO from "@modules/accounts/dtos/ICreateUserDTO";
+import IUserRepository from "@modules/accounts/repositories/IUserRepository";
+import User from "../entities/User";
 
 class UserRepository implements IUserRepository {
   private repository: Repository<User>;
