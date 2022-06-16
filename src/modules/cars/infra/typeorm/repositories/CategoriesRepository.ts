@@ -2,7 +2,7 @@ import AppDataSource from "@database/ormconfig";
 import { Repository } from "typeorm";
 
 import ICreateCategoryDTO from "@modules/cars/dtos/ICreateCategoryDTO";
-import Category from "../typeorm/entities/Category";
+import Category from "../entities/Category";
 import ICategoriesRepository from "@modules/cars/repositories/ICategoriesRepository";
 
 class CategoriesRepository implements ICategoriesRepository {

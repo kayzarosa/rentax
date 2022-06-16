@@ -3,7 +3,7 @@ import AppDataSource from "@database/ormconfig";
 
 import ICreateSpecificationDTO from "@modules/cars/dtos/ICreateSpecificationDTO";
 import ISpecificatiosRepository from "@modules/cars/repositories/ISpecificatiosRepository";
-import Specification from "../typeorm/entities/Specification";
+import Specification from "../entities/Specification";
 
 export default class SpecificatiosRepository
   implements ISpecificatiosRepository
