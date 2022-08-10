@@ -1,21 +1,17 @@
 import "reflect-metadata";
-import { DataSource } from "typeorm";
+import { DataSource, DataSourceOptions } from "typeorm";
 
-const AppDataSource = new DataSource({
+const infoConnection: DataSourceOptions = {
   type: "postgres",
-  host: "database_ignite",
+  host: process.env.NODE_ENV !== "test" ? "database_ignite" : "localhost",
   port: 5432,
   username: "docker",
   password: "ignite",
-  database: "rentx",
+  database: process.env.NODE_ENV === "test" ? "rentx_test" : "rentx",
   entities: ["src/modules/**/infra/typeorm/entities/*.ts"],
-  migrations: ["src/shared/infra/typeorm/migrations/*.ts"]
-});
+  migrations: ["src/shared/infra/typeorm/migrations/*.ts"],
+};
 
-AppDataSource.initialize()
-  .then(async () => {
-    console.log("Initializing the database...");
-  })
-  .catch((err) => console.log(err));
+const AppDataSource = new DataSource(infoConnection);
 
 export default AppDataSource;
