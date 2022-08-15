@@ -3,14 +3,14 @@ import AppError from "@shared/errors/AppError";
 import CreateCategoryUseCase from "./CreateCategoryUseCase";
 import CategoriesRepositoryInMemory from "@modules/cars/repositories/in-memory/CategoriesRepositoryInMemory";
 
-let categoryResopitoryInMemory: CategoriesRepositoryInMemory;
+let categoryRepositoryInMemory: CategoriesRepositoryInMemory;
 let createCategoryUseCase: CreateCategoryUseCase;
 
 describe("Create Category", () => {
   beforeEach(() => {
-    categoryResopitoryInMemory = new CategoriesRepositoryInMemory();
+    categoryRepositoryInMemory = new CategoriesRepositoryInMemory();
     createCategoryUseCase = new CreateCategoryUseCase(
-      categoryResopitoryInMemory
+      categoryRepositoryInMemory
     );
   });
 
@@ -22,7 +22,7 @@ describe("Create Category", () => {
 
     await createCategoryUseCase.execute(category);
 
-    const categoryCreated = await categoryResopitoryInMemory.findByName(
+    const categoryCreated = await categoryRepositoryInMemory.findByName(
       category.name
     );
 
