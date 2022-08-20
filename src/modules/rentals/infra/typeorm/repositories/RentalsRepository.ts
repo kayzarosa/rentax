@@ -1,4 +1,4 @@
-import { Repository } from "typeorm";
+import { IsNull, Repository } from "typeorm";
 import AppDataSource from "@database/ormconfig";
 
 import IRentalsRepository from "@modules/rentals/repositories/IRentalsRepository";
@@ -21,13 +21,17 @@ class RentalsRepository implements IRentalsRepository {
   }
 
   async findOpenRentalByCar(car_id: string): Promise<Rental> {
-    const openByCar = await this.repository.findOne({ where: { car_id } });
+    const openByCar = await this.repository.findOne({
+      where: { car_id, end_date: IsNull() },
+    });
 
     return openByCar;
   }
 
   async findOpenRentalByUser(user_id: string): Promise<Rental> {
-    const openByUser = await this.repository.findOne({ where: { user_id } });
+    const openByUser = await this.repository.findOne({
+      where: { user_id, end_date: IsNull() },
+    });
 
     return openByUser;
   }
