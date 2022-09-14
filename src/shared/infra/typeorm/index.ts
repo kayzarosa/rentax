@@ -5,4 +5,5 @@ AppDataSource.initialize()
     console.log("Initializing the database...");
   })
   .catch((err) => console.log(err));
-  
+
+export default AppDataSource;

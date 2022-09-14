@@ -8,7 +8,7 @@ describe("List Category Controller", () => {
   beforeAll(async () => {
     await AppDataSource.initialize()
       .then(async () => {
-        console.log("Initializing the database...");
+        // console.log("Initializing the database...");
         await AppDataSource.runMigrations();
       })
       .catch((err) => console.log(err));
@@ -21,7 +21,7 @@ describe("List Category Controller", () => {
   afterAll(async () => {
     await AppDataSource.destroy()
       .then(() => {
-        console.log("Banco finalizado");
+        // console.log("Banco finalizado");
       })
       .catch((err) => console.log(err));
   });
