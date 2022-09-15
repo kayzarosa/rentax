@@ -4,6 +4,9 @@ import { sign } from "jsonwebtoken";
 
 import AppError from "@shared/errors/AppError";
 import IUserRepository from "@modules/accounts/repositories/IUserRepository";
+import IUsersTokenRepository from "@modules/accounts/repositories/IUsersTokenRepository";
+import auth from "@config/auth";
+import IDateProvider from "@shared/container/providers/DateProvider/IDateProvider";
 
 interface IRequest {
   email: string;
@@ -16,17 +19,31 @@ interface IResponse {
     email: string;
   };
   token: string;
+  refresh_token: string;
 }
 
 @injectable()
 class AuthenticateUserUseCase {
   constructor(
     @inject("UserRepository")
-    private userRepository: IUserRepository
+    private userRepository: IUserRepository,
+
+    @inject("UsersTokenRepository")
+    private usersTokenRepository: IUsersTokenRepository,
+
+    @inject("DayDateProvider")
+    private dayDateProvider: IDateProvider
   ) {}
 
   async execute({ email, password }: IRequest): Promise<IResponse> {
     const user = await this.userRepository.findByEmail(email);
+    const {
+      expires_in_token,
+      secrete_refresh_token,
+      secrete_token,
+      expires_in_refresh_token,
+      expires_refresh_token_days,
+    } = auth;
 
     if (!user) {
       throw new AppError("Email or password incorrect.");
@@ -38,9 +55,20 @@ class AuthenticateUserUseCase {
       throw new AppError("Email or password incorrect.");
     }
 
-    const token = sign({}, "8ef86431456bd51035bc4f07f74f0d5b", {
+    const token = sign({}, secrete_token, {
       subject: user.id,
-      expiresIn: "1d",
+      expiresIn: expires_in_token,
+    });
+
+    const refresh_token = sign({ email }, secrete_refresh_token, {
+      subject: user.id,
+      expiresIn: expires_in_refresh_token,
+    });
+
+    await this.usersTokenRepository.create({
+      user_id: user.id,
+      refresh_token,
+      expires_date: this.dayDateProvider.addDays(expires_refresh_token_days),
     });
 
     return {
@@ -49,6 +77,7 @@ class AuthenticateUserUseCase {
         email: user.email,
       },
       token,
+      refresh_token,
     };
   }
 }
