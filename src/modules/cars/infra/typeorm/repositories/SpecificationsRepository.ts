@@ -2,11 +2,11 @@ import { In, Repository } from "typeorm";
 import AppDataSource from "@database/ormconfig";
 
 import ICreateSpecificationDTO from "@modules/cars/dtos/ICreateSpecificationDTO";
-import ISpecificatiosRepository from "@modules/cars/repositories/ISpecificatiosRepository";
+import ISpecificationsRepository from "@modules/cars/repositories/ISpecificationsRepository";
 import Specification from "../entities/Specification";
 
-export default class SpecificatiosRepository
-  implements ISpecificatiosRepository
+export default class SpecificationsRepository
+  implements ISpecificationsRepository
 {
   private repository: Repository<Specification>;
 
