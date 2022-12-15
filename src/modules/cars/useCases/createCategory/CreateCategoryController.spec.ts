@@ -1,8 +1,7 @@
 import request from "supertest";
 
-import app from "@shared/infra/http/app";
-
 import AppDataSource from "@database/ormconfig";
+import app from "@shared/infra/http/app";
 
 describe("Create Category Controller", () => {
   beforeAll(async () => {

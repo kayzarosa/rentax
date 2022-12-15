@@ -1,9 +1,10 @@
 import { IsNull, Repository } from "typeorm";
-import AppDataSource from "@database/ormconfig";
 
-import IRentalsRepository from "@modules/rentals/repositories/IRentalsRepository";
-import Rental from "../entities/Rental";
+import AppDataSource from "@database/ormconfig";
 import ICreateRentalDTO from "@modules/rentals/dtos/ICreateRentalDTO";
+import IRentalsRepository from "@modules/rentals/repositories/IRentalsRepository";
+
+import Rental from "../entities/Rental";
 
 class RentalsRepository implements IRentalsRepository {
   private repository: Repository<Rental>;
@@ -37,15 +38,15 @@ class RentalsRepository implements IRentalsRepository {
   }
 
   async findById(id: string): Promise<Rental> {
-    const rental = await this.repository.findOne({ where: { id: id } });
+    const rental = await this.repository.findOne({ where: { id } });
 
     return rental;
   }
 
   async findByUser(user_id: string): Promise<Rental[]> {
     const rentalUser = await this.repository.find({
-      where: { user_id: user_id },
-      relations: ["car"]
+      where: { user_id },
+      relations: ["car"],
     });
 
     return rentalUser;

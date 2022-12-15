@@ -13,7 +13,7 @@ class MailProviderInMemory implements IMailProvider {
       to,
       subject,
       variables,
-      path
+      path,
     });
   }
 }

@@ -1,6 +1,6 @@
 import { Repository } from "typeorm";
-import AppDataSource from "@database/ormconfig";
 
+import AppDataSource from "@database/ormconfig";
 import ICreateUserTokenDTO from "@modules/accounts/dtos/ICreateUserTokenDTO";
 import IUsersTokenRepository from "@modules/accounts/repositories/IUsersTokenRepository";
 
@@ -27,7 +27,7 @@ class UsersTokenRepository implements IUsersTokenRepository {
   ): Promise<UserToken> {
     const usersTokens = await this.repository.findOne({
       where: {
-        user_id: user_id,
+        user_id,
         refresh_token: token,
       },
     });
@@ -40,11 +40,13 @@ class UsersTokenRepository implements IUsersTokenRepository {
   }
 
   async findByRefreshToken(token: string): Promise<UserToken> {
-    return await this.repository.findOne({
+    const result = await this.repository.findOne({
       where: {
         refresh_token: token,
       },
     });
+
+    return result;
   }
 }
 

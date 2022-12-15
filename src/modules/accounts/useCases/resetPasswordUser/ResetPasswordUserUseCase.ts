@@ -1,11 +1,10 @@
-import { inject, injectable } from "tsyringe";
 import { hash } from "bcrypt";
+import { inject, injectable } from "tsyringe";
 
-import AppError from "@shared/errors/AppError";
-
+import IUserRepository from "@modules/accounts/repositories/IUserRepository";
 import IUsersTokenRepository from "@modules/accounts/repositories/IUsersTokenRepository";
 import IDateProvider from "@shared/container/providers/DateProvider/IDateProvider";
-import IUserRepository from "@modules/accounts/repositories/IUserRepository";
+import AppError from "@shared/errors/AppError";
 
 interface IRequest {
   token: string;

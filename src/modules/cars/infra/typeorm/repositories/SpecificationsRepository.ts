@@ -1,8 +1,9 @@
 import { In, Repository } from "typeorm";
-import AppDataSource from "@database/ormconfig";
 
+import AppDataSource from "@database/ormconfig";
 import ICreateSpecificationDTO from "@modules/cars/dtos/ICreateSpecificationDTO";
 import ISpecificationsRepository from "@modules/cars/repositories/ISpecificationsRepository";
+
 import Specification from "../entities/Specification";
 
 export default class SpecificationsRepository
@@ -30,7 +31,7 @@ export default class SpecificationsRepository
 
   async findByName(name: string): Promise<Specification> {
     const specification = await this.repository.findOne({
-      where: { name: name },
+      where: { name },
     });
 
     return specification;

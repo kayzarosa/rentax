@@ -1,8 +1,9 @@
-import AppDataSource from "@database/ormconfig";
 import { Repository } from "typeorm";
 
+import AppDataSource from "@database/ormconfig";
 import ICreateUserDTO from "@modules/accounts/dtos/ICreateUserDTO";
 import IUserRepository from "@modules/accounts/repositories/IUserRepository";
+
 import User from "../entities/User";
 
 class UserRepository implements IUserRepository {
@@ -19,7 +20,7 @@ class UserRepository implements IUserRepository {
   }
 
   async findByEmail(email: string): Promise<User> {
-    const user = await this.repository.findOne({ where: { email: email } });
+    const user = await this.repository.findOne({ where: { email } });
 
     return user;
   }

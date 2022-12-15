@@ -6,7 +6,7 @@ const tmpFolder = resolve(__dirname, "..", "..", "tmp");
 
 export default {
   tmpFolder,
-  
+
   storage: multer.diskStorage({
     destination: tmpFolder,
     filename: (request, file, callback) => {
@@ -14,6 +14,6 @@ export default {
       const fileName = `${fileHash}-${file.originalname}`;
 
       return callback(null, fileName);
-    }
+    },
   }),
 };

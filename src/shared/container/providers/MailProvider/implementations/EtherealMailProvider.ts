@@ -1,7 +1,7 @@
-import { injectable } from "tsyringe";
-import nodemailer, { Transporter } from "nodemailer";
-import handlebars from "handlebars";
 import fs from "fs";
+import handlebars from "handlebars";
+import nodemailer, { Transporter } from "nodemailer";
+import { injectable } from "tsyringe";
 
 import IMailProvider from "../IMailProvider";
 
@@ -38,7 +38,7 @@ class EtherealMailProvider implements IMailProvider {
 
     const templateParse = handlebars.compile(templateFileContent);
 
-    const templateHTML = templateParse(variables)
+    const templateHTML = templateParse(variables);
 
     const message = await this.client.sendMail({
       to,

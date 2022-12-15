@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { container } from "tsyringe";
+
 import ResetPasswordUserUseCase from "./ResetPasswordUserUseCase";
 
 class ResetPasswordUserController {
@@ -13,7 +14,7 @@ class ResetPasswordUserController {
 
     await resetPasswordUserUseCase.execute({
       token: String(token),
-      password
+      password,
     });
 
     return response.send();

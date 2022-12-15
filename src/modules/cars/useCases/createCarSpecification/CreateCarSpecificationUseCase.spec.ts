@@ -1,8 +1,8 @@
+import CarsRepositoryInMemory from "@modules/cars/repositories/in-memory/CarsRepositoryInMemory";
+import SpecificationRepositoryInMemory from "@modules/cars/repositories/in-memory/SpecificationRepositoryInMemory";
 import AppError from "@shared/errors/AppError";
 
-import CarsRepositoryInMemory from "@modules/cars/repositories/in-memory/CarsRepositoryInMemory";
 import CreateCarSpecificationUseCase from "./CreateCarSpecificationUseCase";
-import SpecificationRepositoryInMemory from "@modules/cars/repositories/in-memory/SpecificationRepositoryInMemory";
 
 let createCarSpecificationUseCase: CreateCarSpecificationUseCase;
 let carsRepositoryInMemory: CarsRepositoryInMemory;

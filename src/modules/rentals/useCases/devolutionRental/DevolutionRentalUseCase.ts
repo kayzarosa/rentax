@@ -1,10 +1,10 @@
 import { inject, injectable } from "tsyringe";
-import AppError from "@shared/errors/AppError";
 
-import IRentalsRepository from "@modules/rentals/repositories/IRentalsRepository";
 import ICarsRepository from "@modules/cars/repositories/ICarsRepository";
-import IDateProvider from "@shared/container/providers/DateProvider/IDateProvider";
 import Rental from "@modules/rentals/infra/typeorm/entities/Rental";
+import IRentalsRepository from "@modules/rentals/repositories/IRentalsRepository";
+import IDateProvider from "@shared/container/providers/DateProvider/IDateProvider";
+import AppError from "@shared/errors/AppError";
 
 interface IRequest {
   id: string;
@@ -36,10 +36,7 @@ class DevolutionRentalUseCase {
 
     const dateNow = this.dayDateProvider.dateNow();
 
-    let daily = this.dayDateProvider.compareInDays(
-      rental.start_date,
-      dateNow
-    );
+    let daily = this.dayDateProvider.compareInDays(rental.start_date, dateNow);
 
     if (daily <= 0) {
       daily = minimum_daily;

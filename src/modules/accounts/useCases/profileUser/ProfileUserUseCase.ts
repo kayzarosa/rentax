@@ -1,9 +1,9 @@
 import { inject, injectable } from "tsyringe";
 
-import IUserRepository from "@modules/accounts/repositories/IUserRepository";
-import AppError from "@shared/errors/AppError";
 import IUserResponseDTO from "@modules/accounts/dtos/IUserResponseDTO";
 import UserMap from "@modules/accounts/mapper/UserMap";
+import IUserRepository from "@modules/accounts/repositories/IUserRepository";
+import AppError from "@shared/errors/AppError";
 
 @injectable()
 class ProfileUserUseCase {

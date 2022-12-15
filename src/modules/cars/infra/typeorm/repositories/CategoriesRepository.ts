@@ -1,9 +1,10 @@
-import AppDataSource from "@database/ormconfig";
 import { Repository } from "typeorm";
 
+import AppDataSource from "@database/ormconfig";
 import ICreateCategoryDTO from "@modules/cars/dtos/ICreateCategoryDTO";
-import Category from "../entities/Category";
 import ICategoriesRepository from "@modules/cars/repositories/ICategoriesRepository";
+
+import Category from "../entities/Category";
 
 class CategoriesRepository implements ICategoriesRepository {
   private repository: Repository<Category>;
@@ -27,7 +28,7 @@ class CategoriesRepository implements ICategoriesRepository {
   }
 
   async findByName(name: string): Promise<Category> {
-    const category = await this.repository.findOne({ where: { name: name } });
+    const category = await this.repository.findOne({ where: { name } });
 
     return category;
   }

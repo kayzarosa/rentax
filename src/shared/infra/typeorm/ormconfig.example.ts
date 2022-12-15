@@ -1,6 +1,6 @@
-//docker-compose exec app node --require ts-node/register ./node_modules/typeorm/cli.js migration:run -d src/database
-//yarn typeorm migration:create src/database/migrations/CreateCategories
-//yarn typeorm migration:revert -d src/database/ormconfig.ts
+// docker-compose exec app node --require ts-node/register ./node_modules/typeorm/cli.js migration:run -d src/database
+// yarn typeorm migration:create src/database/migrations/CreateCategories
+// yarn typeorm migration:revert -d src/database/ormconfig.ts
 
 import "reflect-metadata";
 import { DataSource, DataSourceOptions } from "typeorm";

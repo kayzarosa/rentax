@@ -1,18 +1,19 @@
 import ICreateCategoryDTO from "@modules/cars/dtos/ICreateCategoryDTO";
 import Category from "@modules/cars/infra/typeorm/entities/Category";
+
 import ICategoriesRepository from "../ICategoriesRepository";
 
 class CategoriesRepositoryInMemory implements ICategoriesRepository {
-  private catecories: Category[] = [];
+  private categories: Category[] = [];
 
   async findByName(name: string): Promise<Category> {
-    const category = this.catecories.find((category) => category.name === name);
+    const category = this.categories.find((category) => category.name === name);
 
     return category;
   }
 
   async list(): Promise<Category[]> {
-    const all = this.catecories;
+    const all = this.categories;
 
     return all;
   }
@@ -25,7 +26,7 @@ class CategoriesRepositoryInMemory implements ICategoriesRepository {
       description,
     });
 
-    this.catecories.push(category);
+    this.categories.push(category);
   }
 }
 
